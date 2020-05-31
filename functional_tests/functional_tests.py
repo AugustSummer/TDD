@@ -22,7 +22,7 @@ class NewVisitorTest(unittest.TestCase):
 		
 	def check_for_row_in_list_table(self,row_text):
 		table=self.browser.find_element_by_id('id_list_table')
-		rows=table.find_element_by_tag_name('tr')
+		rows=table.find_elements_by_tag_name('tr')
 		self.asserIn(row_text,[row.text for row in rows])
 	
 
@@ -64,5 +64,4 @@ class NewVisitorTest(unittest.TestCase):
 		# Selenium 中 find_element_by... 和 find_elements_by... 这两类函数的区别。
 		# 前者返回一个元素，如果找不到就抛出异常；后者返回一个列表，这个列表可能为空。
 
-if __name__=='__main__':
-	unittest.main(warnings='ignore')  # 禁止抛出ResourceWarning异常
+
