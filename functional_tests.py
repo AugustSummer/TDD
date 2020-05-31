@@ -52,7 +52,8 @@ class NewVisitorTest(unittest.TestCase):
 		#self.asserIn('1:Buy paecock feathers',[row.text for row in rows])
 		self.assertTrue(
 			any(row.text=='1:Buy peacock feathers' for row in rows),
-			f"New to-do item did not appear in table.Content were:\n{table.text}"
+			"New to-do item did not appear in table"
+            #f"New to-do item did not appear in table.Content were:\n{table.text}"
 		)# f-string可以使用花括号添加变量
 		self.asserIn(
 			'2:Use peacock feathers to make a fly',
