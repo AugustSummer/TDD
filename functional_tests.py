@@ -20,10 +20,10 @@ class NewVisitorTest(unittest.TestCase):
 	def tearDown(self): # 测试之后运行，关闭浏览器
 		self.browser.quit()
 		
-	'''def check_for_row_in_list_table(self,row_text):
+	def check_for_row_in_list_table(self,row_text):
 		table=self.browser.find_element_by_id('id_list_table')
 		rows=table.find_element_by_tag_name('tr')
-		self.asserIn(row_text,[row.text for row in rows])'''
+		self.asserIn(row_text,[row.text for row in rows])
 	
 
 	def test_can_start_a_list_and_retrieve_it_later(self):
@@ -34,27 +34,28 @@ class NewVisitorTest(unittest.TestCase):
 		self.assertIn('To-Do',header_text)
 		# 输入待办事项
 		inputbox=self.browser.find_element_by_id('id_new_item')
-		self.assertEqual(
+		'''self.assertEqual(
 			inputbox.get_attribute('placeholder'),
 			'Enter a To-do item'
-		)
-		inputbox.send_keys('Buy peacock feathers')
+		)'''
+		inputbox.send_keys('Use peacock feathers to mak a fly')#('Buy peacock feathers')
+        #inputbox.send_keys('Use peacock feathers to mak a fly')
 		#页面更新
-		inputbox.send_keys(Keys.Enter) # send_keys，Selenium在输入框中输入内容的方法
+		inputbox.send_keys(Keys.ENTER) # send_keys，Selenium在输入框中输入内容的方法
 		time.sleep(1)
 		
 		# 页面再次更新，显示待办事项
-		# self.check_for_row_in_list_table('1:Buy peacock feathers')
-		# self.check_for_row_in_list_table('2:Use peacock feathers to make a fly')
+		self.check_for_row_in_list_table('1:Buy peacock feathers')
+		self.check_for_row_in_list_table('2:Use peacock feathers to make a fly')
 		
 		table=self.browser.find_element_by_id('id_list_table')
 		rows=table.find_elements_by_tag_name('tr')
-		#self.asserIn('1:Buy paecock feathers',[row.text for row in rows])
-		self.assertTrue(
+		self.asserIn('1:Buy paecock feathers',[row.text for row in rows])
+		'''self.assertTrue(
 			any(row.text=='1:Buy peacock feathers' for row in rows),
-			"New to-do item did not appear in table"
-            #f"New to-do item did not appear in table.Content were:\n{table.text}"
-		)# f-string可以使用花括号添加变量
+			#"New to-do item did not appear in table"
+            f"New to-do item did not appear in table.Content were:\n{table.text}"
+		)# f-string可以使用花括号添加变量'''
 		self.asserIn(
 			'2:Use peacock feathers to make a fly',
 			[row.text for row in rows]
