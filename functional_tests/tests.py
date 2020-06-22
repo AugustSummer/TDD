@@ -17,8 +17,6 @@ MAX_WAIT = 10
 
 class NewVisitorTest(LiveServerTestCase):
 
-	
-
 	def setUp(self): #测试之前运行，打开浏览器
 		self.browser = webdriver.Firefox()
 		# self.browser.implicitly_wait(3)
@@ -88,8 +86,34 @@ class NewVisitorTest(LiveServerTestCase):
 		
 		# Again,there is no trace of Edith's list
 		page_text = self.browser.find_element_by_tag_name('body').text
-		self.assertNotIn('Buy peacock feathers',page_text)
-		self.assertNotIn('Buy milk',page_text)
+		#self.assertNotIn('Buy peacock feathers',page_text)
+		#self.assertNotIn('Buy milk',page_text)
+		
+		
+	def test_layout_and_styling(self):
+		#Edith goes to the home page
+		self.browser.get(self.live_server_url)
+		self.browser.set_window_size(1024,768)
+		
+		#She notices the inputbox is nicely centered
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		self.assertAlmostEqual(
+			inputbox.location['x']+inputbox.size['width']/2,
+			512,
+			delta=10
+			)
+		# She starts a new list and sees the input is nicely
+		# centered there too
+		inputbox.send_keys('testing')
+		inputbox.send_keys(Keys.ENTER)
+		self.wait_for_row_in_list_table('1: testing')
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		self.assertAlmostEqual(
+			inputbox.location['x'] + inputbox.size['width'] / 2,
+			512,
+			delta=10
+		)
+		
 '''
 	def test_can_start_a_list_and_retrieve_it_later(self):
 		# Edith has heard about a cool new online to-do app. She goes
