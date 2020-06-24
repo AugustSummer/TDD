@@ -1,8 +1,7 @@
 from django.test import TestCase
-from django.urls import resolve  # resolve是Django用来解析URL的function，找到URL应该映射到哪个view
-from django.http import HttpRequest
-
-from lists.views import home_page
+#from django.urls import resolve  # resolve是Django用来解析URL的function，找到URL应该映射到哪个view
+#from django.http import HttpRequest
+#from lists.views import home_page
 from lists.models import Item,List
 
 # Create your tests here.
@@ -34,9 +33,9 @@ class HomePageTest(TestCase):
         self.assertTemplateUsed(response,'home.html')
     
     
-    def test_only_saves_items_when_necessary(self):
+    '''def test_only_saves_items_when_necessary(self):
         self.client.get('/')
-        self.assertEqual(Item.objects.count(),0)
+        self.assertEqual(Item.objects.count(),0)'''
     
     
     '''def test_displays_all_list_items(self):
